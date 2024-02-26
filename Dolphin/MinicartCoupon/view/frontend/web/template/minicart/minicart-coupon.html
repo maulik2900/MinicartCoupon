@@ -1,0 +1,46 @@
+<!-- set coupon discount field -->
+<div class="block discount" id="block-minicart-discount">
+    <div class="content" data-role="content" aria-labelledby="block-discount-heading">
+        <form id="minicart-discount-coupon-form" data-bind="attr: {action: couponPostUrl()}" method="post" data-mage-init='{"validation":{}}'>
+            <div id="mini-cart-coupon-message"></div>
+            <div class="fieldset coupon">
+                <input type="hidden" name="remove" id="remove-coupon" value="0">
+                <div class="field">
+                    <label for="coupon_code" class="label">
+                        <span><!-- ko i18n: 'Apply Discount Code' --><!-- /ko --></span>
+                    </label>
+                    <div class="control">
+                        <!-- ko ifnot: isCouponUsed() -->
+                        <input type="text" class="input-text" id="coupon_code" name="coupon_code" value=""
+                            placeholder="Enter discount code"
+                            data-bind="value: couponCode, attr: { placeholder: 'Enter discount code', required: true }">
+                        <!-- /ko -->
+                        <!-- ko if: isCouponUsed() -->
+                        <input type="text" class="input-text" id="coupon_code" name="coupon_code" value=""
+                            placeholder="Enter discount code"
+                            data-bind="value: usedCouponCode(), attr: { disabled: 'disabled'}">
+                        <!-- /ko -->
+                    </div>
+                    <div id="coupon_code-error" class="mage-error"></div>
+                </div>
+                <div class="actions-toolbar">
+                    <!-- ko ifnot: isCouponUsed() -->
+                    <div class="primary">
+                        <button type="submit" class="minicart apply primary" value="Apply Discount" data-validate='{"required":true}'>
+                            <span><!-- ko i18n: 'Apply Discount' --><!-- /ko --></span>
+                        </button>
+                    </div>
+                    <!-- /ko -->
+                    <!-- ko if: isCouponUsed() -->
+                    <div class="primary">
+                        <button type="submit" class="minicart cancel primary" value="Cancel Coupon">
+                            <span><!-- ko i18n: 'Cancel Coupon' --><!-- /ko --></span>
+                        </button>
+                    </div>
+                    <!-- /ko -->
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
